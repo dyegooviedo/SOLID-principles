@@ -24,14 +24,17 @@ function verifyAndRegisterEmailNewsletter(email)
 // CORRETO:
 function registerEmailNewsletter(email)
 {
-    if( !checkIsEmail(email) )
-        return "Por favor digite um e-mail válido.";
-    else
-        return "E-mail registrado.";
+    checkIsEmail(email);
+    return "E-mail registrado.";
 }
+
 function checkIsEmail(string)
 {
-    return string.includes("@");
+    const isEmail = string.includes("@");
+    if(!isEmail){
+        throw new Error("Por favor digite um e-mail válido.");
+    } 
+    return true;
 }
 
 // Caso 2: Verificar se os parâmetros são números e somá-los
@@ -45,11 +48,14 @@ const sum = (a, b) => {
 
 // CORRETO:
 const sum = (a, b) => {
-    if(checkIsNumber(a) && checkIsNumber(b))
-        return a + b;
-    else
-        return "Por favor, informe números para somá-los";
+    checkIsNumber(a,b);
+    return a + b;
 }
-const checkIsNumber = (value) => {
-    return typeof(value) === "number";
+
+const checkIsNumber = (a,b) => {
+    const isNumber = typeof(a) === "number" && typeof(b) === "number";
+    if(!isNumber){
+        throw new Error("Por favor, informe números válidos para somá-los");
+    }
+    return true;
 }
